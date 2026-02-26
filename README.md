@@ -2,17 +2,15 @@
 
 # Docker configuration guide for passing in environment variables when building -arg and deploying -e
 
-+------------------------+-------------+---------------------+
-| Variable | Environment | Deployment Method |
-+------------------------+-------------+---------------------+
-| VITE_CONVEX_URL | Client | Docker --build-arg |
-| VITE_CONVEX_SITE_URL | Client | Docker --build-arg |
-| WORKOS_CLIENT_ID | Server | Docker -e (Runtime) |
-| WORKOS_API_KEY | Server | Docker -e (Runtime) |
-| WORKOS_COOKIE_PASSWORD | Server | Docker -e (Runtime) |
-| WORKOS_REDIRECT_URI | Server | Docker -e (Runtime) |
-| CONVEX_DEPLOYMENT | Server | Docker -e (Runtime) |
-+------------------------+-------------+---------------------+
+| Variable               | Environment | Deployment Method   |
+| ---------------------- | ----------- | ------------------- |
+| VITE_CONVEX_URL        | Client      | Docker --build-arg  |
+| VITE_CONVEX_SITE_URL   | Client      | Docker --build-arg  |
+| WORKOS_CLIENT_ID       | Server      | Docker -e (Runtime) |
+| WORKOS_API_KEY         | Server      | Docker -e (Runtime) |
+| WORKOS_COOKIE_PASSWORD | Server      | Docker -e (Runtime) |
+| WORKOS_REDIRECT_URI    | Server      | Docker -e (Runtime) |
+| CONVEX_DEPLOYMENT      | Server      | Docker -e (Runtime) |
 
 ## Deploy using session based environment variables
 
