@@ -14,7 +14,7 @@
 
 ## Deploy using session based environment variables
 
-### sample docker build command WORKS!
+sample docker build command WORKS!
 
 ```bash
 docker build \
@@ -24,7 +24,7 @@ docker build \
   -t odesa .
 ```
 
-### without vite public variables WORKS!
+without vite public variables WORKS!
 
 ```bash
 docker run \
@@ -39,13 +39,13 @@ docker run \
 
 ## Deploy using file based env
 
-### actual sample build WORKS AS WELL!
+actual sample build WORKS AS WELL!
 
 ```bash
 docker build -f Dockerfile.FileEnv -t odesa .
 ```
 
-### actual docker deploy WORKS AS WELL!
+actual docker deploy WORKS AS WELL!
 
 ```bash
 docker run \
