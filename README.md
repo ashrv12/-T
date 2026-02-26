@@ -14,8 +14,9 @@
 
 ## Deploy using session based environment variables
 
+### sample docker build command WORKS!
+
 ```bash
-# sample docker build command WORKS!
 docker build \
   --build-arg VITE_CONVEX_URL=$VITE_CONVEX_URL \
   --build-arg VITE_CONVEX_SITE_URL=$VITE_CONVEX_SITE_URL \
@@ -23,8 +24,9 @@ docker build \
   -t odesa .
 ```
 
+### without vite public variables WORKS!
+
 ```bash
-# without vite public variables WORKS!
 docker run \
   -e WORKOS_CLIENT_ID="$WORKOS_CLIENT_ID" \
   -e WORKOS_API_KEY="$WORKOS_API_KEY" \
@@ -37,14 +39,15 @@ docker run \
 
 ## Deploy using file based env
 
-```bash
-# actual sample build WORKS AS WELL!
+### actual sample build WORKS AS WELL!
 
+```bash
 docker build -f Dockerfile.FileEnv -t odesa .
 ```
 
+### actual docker deploy WORKS AS WELL!
+
 ```bash
-# actual docker deploy WORKS AS WELL!
 docker run \
  -p 3000:3000 \
  -d -v $(pwd)/.env.local:/app/.env.local \
