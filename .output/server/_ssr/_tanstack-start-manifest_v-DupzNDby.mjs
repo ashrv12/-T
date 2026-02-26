@@ -1,4 +1,0 @@
-const tsrStartManifest = () => ({ "routes": { "__root__": { "filePath": "/Users/shrvb/Coding/-t/src/routes/__root.tsx", "children": ["/", "/_authenticated", "/callback"], "preloads": ["/assets/main-tizexeE-.js"], "assets": [] }, "/": { "filePath": "/Users/shrvb/Coding/-t/src/routes/index.tsx", "assets": [], "preloads": ["/assets/index-CUXjYo9C.js"] }, "/_authenticated": { "filePath": "/Users/shrvb/Coding/-t/src/routes/_authenticated.tsx", "children": ["/_authenticated/authenticated"], "assets": [], "preloads": ["/assets/_authenticated-DmhkVBsW.js"] }, "/callback": { "filePath": "/Users/shrvb/Coding/-t/src/routes/callback.tsx" }, "/_authenticated/authenticated": { "filePath": "/Users/shrvb/Coding/-t/src/routes/_authenticated/authenticated.tsx", "assets": [], "preloads": ["/assets/authenticated-C7TZ0ZuO.js"] } }, "clientEntry": "/assets/main-tizexeE-.js" });
-export {
-  tsrStartManifest
-};
