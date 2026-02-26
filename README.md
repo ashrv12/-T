@@ -20,7 +20,9 @@ sample docker build command WORKS!
 docker build \
   --build-arg VITE_CONVEX_URL=$VITE_CONVEX_URL \
   --build-arg VITE_CONVEX_SITE_URL=$VITE_CONVEX_SITE_URL \
-  -f Dockerfile.SessionEnv \
+  --build-arg VITE_PUBLIC_POSTHOG_KEY=$VITE_PUBLIC_POSTHOG_KEY \
+  --build-arg VITE_PUBLIC_POSTHOG_HOST=$VITE_PUBLIC_POSTHOG_HOST \
+  -f $(pwd)/docker/Dockerfile.SessionEnv \
   -t odesa .
 ```
 
@@ -42,7 +44,7 @@ docker run \
 actual sample build WORKS AS WELL!
 
 ```bash
-docker build -f Dockerfile.FileEnv -t odesa .
+docker build -f $(pwd)/docker/Dockerfile.FileEnv -t odesa .
 ```
 
 actual docker deploy WORKS AS WELL!
