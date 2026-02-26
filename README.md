@@ -1,6 +1,6 @@
 # How to deploy into production with CIS compliance
 
-# Docker configuration guide for passing in environment variables when building -arg and deploying -e
+## Docker configuration guide for passing in environment variables when building -arg and deploying -e
 
 | Variable               | Environment | Deployment Method   |
 | ---------------------- | ----------- | ------------------- |
