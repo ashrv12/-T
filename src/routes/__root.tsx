@@ -6,6 +6,7 @@ import type { QueryClient } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 import type { ConvexReactClient } from 'convex/react';
 import type { ConvexQueryClient } from '@convex-dev/react-query';
+import { PostHogProvider } from 'posthog-js/react';
 
 const fetchWorkosAuth = createServerFn({ method: 'GET' }).handler(async () => {
   const auth = await getAuth();
@@ -32,7 +33,7 @@ export const Route = createRootRouteWithContext<{
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'Convex + TanStack Start + WorkOS AuthKit',
+        title: '-T',
       },
     ],
     links: [
@@ -63,6 +64,11 @@ function RootComponent() {
   );
 }
 
+const options = {
+  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  defaults: '2026-01-30',
+} as const;
+
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en">
@@ -70,7 +76,9 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={options}>
+          {children}
+        </PostHogProvider>
         <Scripts />
       </body>
     </html>

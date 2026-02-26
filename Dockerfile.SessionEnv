@@ -1,0 +1,57 @@
+FROM oven/bun:alpine AS build
+
+# I have made the grave mistake of not capitalizing the ARGs here and
+# this small mishap cost me a full nights misery of debugging. Don't make my mistake T-T
+# old sample
+# ----------------------------
+# ARG convex_url
+# ARG convex_site_url
+# ENV VITE_CONVEX_URL=$convex_url
+# ENV VITE_CONVEX_SITE_URL=$convex_site_url
+# ----------------------------
+# This is terrible, and is considered an anti-pattern. My god what was I thinking. It could work tho :3
+# ```bash
+# docker build \
+#   --build-arg convex_url=$VITE_CONVEX_URL \
+#   --build-arg convex_site_url=$VITE_CONVEX_SITE_URL \
+#   -f Dockerfile.SessionEnv \
+#   -t odesa .
+# ```
+# ugly but works.
+
+ARG VITE_CONVEX_URL
+ARG VITE_CONVEX_SITE_URL
+
+ENV VITE_CONVEX_URL=$VITE_CONVEX_URL
+ENV VITE_CONVEX_SITE_URL=$VITE_CONVEX_SITE_URL
+
+WORKDIR /build
+
+COPY package*.json .
+RUN bun i
+
+COPY . .
+RUN bun --no-env-file run build
+
+FROM oven/bun:alpine AS deploy
+
+ENV TZ=Asia/Ulaanbaatar
+ENV NODE_ENV=production
+ENV PORT=3000
+
+# The rest of the environment variables should be given via
+# the docker cli if deploying via docker, or via the ENV variable in the kubernetes deployment yaml
+
+WORKDIR /app
+
+RUN adduser -D odesa
+
+COPY --from=build --chown=odesa:odesa /build/.output /app/.output
+
+USER odesa
+
+EXPOSE 3000
+
+CMD ["bun", "--no-env-file", "/app/.output/server/index.mjs"]
+
+

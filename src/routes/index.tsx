@@ -65,6 +65,7 @@ function Content() {
       count: 10,
     }),
   );
+
   const addNumber = useMutation(api.myFunctions.addNumber);
 
   return (
@@ -156,7 +157,10 @@ function UserMenu({ user }: { user: User }) {
   return (
     <div className="flex items-center gap-2">
       <span className="text-sm">{user.email}</span>
-      <button onClick={() => signOut()} className="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600">
+      <button
+        onClick={() => signOut()}
+        className="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 cursor-pointer"
+      >
         Sign out
       </button>
     </div>

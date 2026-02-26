@@ -1,3 +1,56 @@
+# How to deploy into production with CIS compliance
+
+# Docker configuration guide for passing in environment variables when building -arg and deploying -e
+
++------------------------+-------------+---------------------+
+| Variable | Environment | Deployment Method |
++------------------------+-------------+---------------------+
+| VITE_CONVEX_URL | Client | Docker --build-arg |
+| VITE_CONVEX_SITE_URL | Client | Docker --build-arg |
+| WORKOS_CLIENT_ID | Server | Docker -e (Runtime) |
+| WORKOS_API_KEY | Server | Docker -e (Runtime) |
+| WORKOS_COOKIE_PASSWORD | Server | Docker -e (Runtime) |
+| WORKOS_REDIRECT_URI | Server | Docker -e (Runtime) |
+| CONVEX_DEPLOYMENT | Server | Docker -e (Runtime) |
++------------------------+-------------+---------------------+
+
+## Deploy using session based environment variables
+
+```sh
+# sample docker build command WORKS!
+docker build \
+  --build-arg VITE_CONVEX_URL=$VITE_CONVEX_URL \
+  --build-arg VITE_CONVEX_SITE_URL=$VITE_CONVEX_SITE_URL \
+  -f Dockerfile.SessionEnv \
+  -t odesa .
+
+
+# without vite public variables WORKS!
+docker run \
+  -e WORKOS_CLIENT_ID="$WORKOS_CLIENT_ID" \
+  -e WORKOS_API_KEY="$WORKOS_API_KEY" \
+  -e WORKOS_COOKIE_PASSWORD="$WORKOS_COOKIE_PASSWORD" \
+  -e WORKOS_REDIRECT_URI="$WORKOS_REDIRECT_URI" \
+  -e CONVEX_DEPLOYMENT="$CONVEX_DEPLOYMENT" \
+  -p 3000:3000 \
+  -d odesa
+```
+
+## Deploy using file based env
+
+```sh
+# actual sample build WORKS AS WELL!
+
+docker build -f Dockerfile.FileEnv -t odesa .
+
+# actual docker deploy WORKS AS WELL!
+
+docker run \
+ -p 3000:3000 \
+ -d -v $(pwd)/.env.local:/app/.env.local \
+ odesa
+```
+
 # Welcome to your Convex + TanStack Start + WorkOS AuthKit app
 
 This is a [Convex](https://convex.dev/) project using WorkOS AuthKit for authentication.

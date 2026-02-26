@@ -1,0 +1,29 @@
+FROM oven/bun:alpine AS build
+
+WORKDIR /build
+
+COPY package*.json .
+RUN bun i
+
+COPY . .
+RUN bun --env-file=.env.local run build
+
+FROM oven/bun:alpine AS deploy
+
+ENV TZ=Asia/Ulaanbaatar
+ENV NODE_ENV=production
+ENV PORT=3000
+
+WORKDIR /app
+
+RUN adduser -D odesa
+
+COPY --from=build --chown=odesa:odesa /build/.output /app/.output
+
+USER odesa
+
+EXPOSE 3000
+
+CMD ["bun", "--env-file=/app/.env.local", "/app/.output/server/index.mjs"]
+
+
